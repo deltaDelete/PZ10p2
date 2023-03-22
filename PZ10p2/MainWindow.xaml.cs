@@ -24,7 +24,9 @@ namespace PZ10p2
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel() {
-                RichTBox = RichTBox
+                RichTBox = RichTBox,
+                SelectedFontFamily = RichTBox.FontFamily,
+                SelectedFontSize = RichTBox.FontSize
             };
         }
     }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PZ10p2"
+        xmlns:reflection="clr-namespace:System.Reflection;assembly=System.Runtime"
         mc:Ignorable="d"
         MinHeight="225"
         MinWidth="400"
@@ -43,6 +44,7 @@
                     <Button ToolTip="Открыть файл (Ctrl+O)" Command="{Binding OpenFileCommand}">
                         <Image Source="Assets/open.png" />
                     </Button>
+                    <Separator/>
                     <Button ToolTip="Курсив (Ctrl+I)" Command="{Binding ItalicFontCommand}">
                         <Image Source="Assets/italic.png" />
                     </Button>
@@ -52,10 +54,26 @@
                     <Button ToolTip="Подчеркнутый (Ctrl+U)" Command="{Binding UnderlineFontCommand}">
                         <Image Source="Assets/underline.png" />
                     </Button>
+                    <Separator/>
+                    <Button ToolTip="Межстрочный интервал (1.0)" Command="{Binding LineSpacingCommand}" CommandParameter="1.0">
+                        <Image Source="Assets/underline.png" />
+                    </Button>
+                    <Separator/>
                     <ComboBox Width="100" ItemsSource="{Binding FontFamilies}"
                               SelectedItem="{Binding SelectedFontFamily}" ToolTip="Семейство шрифта" />
                     <ComboBox Width="32" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize}"
                               ToolTip="Размер шрифта" />
+                    <ComboBox Width="128" ItemsSource="{Binding FontColors}"
+                              SelectedItem="{Binding SelectedFontColor}" ToolTip="Цвет текста">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type reflection:PropertyInfo}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Rectangle Fill="{Binding Name}" Width="32" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>
