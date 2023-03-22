@@ -35,7 +35,7 @@ namespace PZ10p2 {
             UnderlineFontCommand = new Command(SetUnderline);
             AboutCommand = new Command(About);
             ExitCommand = new Command(() => Application.Current.Shutdown(0));
-            LineSpacingCommand = new Command<double>(SetLineSpacing);
+            LineSpacingCommand = new Command<string>(SetLineSpacing);
         }
 
 
@@ -44,7 +44,7 @@ namespace PZ10p2 {
         public RichTextBox RichTBox { get; set; }
 
         public List<FontFamily> FontFamilies { get; } = Fonts.SystemFontFamilies.OrderBy(f => f.Source).ToList();
-        public List<double> FontSizes { get; } = Enumerable.Range(8, 72).Select(x => (double)x).ToList();
+        public List<double> FontSizes { get; } = Enumerable.Range(1, 72).Select(x => (double)x).ToList();
         public List<System.Reflection.PropertyInfo> FontColors { get; } = typeof(Colors)
             .GetProperties().ToList();
 
@@ -110,7 +110,7 @@ namespace PZ10p2 {
 
         private void OpenFile() {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "RichText Files (*.rtf)|*.rtx|All files (*.*)|*.*";
+            dialog.Filter = "RichText Files (*.rtf)|*.rtf|All files (*.*)|*.*";
 
             var result = dialog.ShowDialog();
 
@@ -211,13 +211,19 @@ namespace PZ10p2 {
             selected.ApplyPropertyValue(Inline.ForegroundProperty, _selectedFontColor.Name);
         }
 
-        private void SetLineSpacing(double height) {
+        private void SetLineSpacing(string height) {
             var selected = RichTBox.Selection;
             if (selected.IsEmpty) {
                 return;
             }
 
-            selected.ApplyPropertyValue(Paragraph.LineHeightProperty, _selectedFontColor.Name);
+            var heightValue = double.Parse(height.Replace('.', ','));
+
+            MessageBox.Show(selected.GetPropertyValue(TextElement.FontSizeProperty).ToString());
+
+            heightValue *= (double)selected.GetPropertyValue(TextElement.FontSizeProperty) * 1.3;
+
+            selected.ApplyPropertyValue(Paragraph.LineHeightProperty, heightValue);
         }
 
         #endregion

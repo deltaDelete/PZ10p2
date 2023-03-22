@@ -20,6 +20,7 @@ namespace PZ10p2 {
 
         public Command(Action<TParameter> execute, Func<TParameter, bool> canExecute) {
             this.execute = execute;
+            this.canExecute = canExecute;
         }
 
         public Command(Action<TParameter> execute) : this(execute, x => true) { }

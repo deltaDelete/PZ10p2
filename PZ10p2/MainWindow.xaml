@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PZ10p2"
         xmlns:reflection="clr-namespace:System.Reflection;assembly=System.Runtime"
+        xmlns:system="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
         MinHeight="225"
         MinWidth="400"
@@ -55,8 +56,23 @@
                         <Image Source="Assets/underline.png" />
                     </Button>
                     <Separator/>
-                    <Button ToolTip="Межстрочный интервал (1.0)" Command="{Binding LineSpacingCommand}" CommandParameter="1.0">
-                        <Image Source="Assets/underline.png" />
+                    <Button ToolTip="Межстрочный интервал (1.0)" Command="{Binding LineSpacingCommand}" CommandParameter="1">
+                        <WrapPanel>
+                            <Image Source="Assets/line-spacing.png" />
+                            <TextBlock Text="1.0" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                    </Button>
+                    <Button ToolTip="Межстрочный интервал (1.5)" Command="{Binding LineSpacingCommand}" CommandParameter="1.5">
+                        <WrapPanel>
+                            <Image Source="Assets/line-spacing.png" />
+                            <TextBlock Text="1.5" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                    </Button>
+                    <Button ToolTip="Межстрочный интервал (2.0)" Command="{Binding LineSpacingCommand}" CommandParameter="2">
+                        <WrapPanel>
+                            <Image Source="Assets/line-spacing.png" />
+                            <TextBlock Text="2.0" VerticalAlignment="Center"/>
+                        </WrapPanel>
                     </Button>
                     <Separator/>
                     <ComboBox Width="100" ItemsSource="{Binding FontFamilies}"

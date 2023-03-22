@@ -23,6 +23,7 @@ namespace PZ10p2
         public MainWindow()
         {
             InitializeComponent();
+            RichTBox.OverridesDefaultStyle = true;
             DataContext = new MainWindowViewModel() {
                 RichTBox = RichTBox,
                 SelectedFontFamily = RichTBox.FontFamily,
